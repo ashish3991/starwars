@@ -1,0 +1,61 @@
+.login-wrapper {
+  background-image: url('../images/starwars_bg.jpg');
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.form-control {
+  height: 400px;
+  width: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  background-color: #b6afaf;
+  background-image: linear-gradient(white, purple, white, blue);
+  opacity: 0.8;
+  box-shadow: 3px 0 8px 8px rgb(34, 29, 56);
+}
+
+.inputField {
+  display: block;
+  margin-top: 20px;
+  height: 30px;
+  font-family: Luminari, fantasy;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.input-control {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.login-icon {
+  height: 80px;
+  width: 80px;
+  opacity: 1;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.login-button {
+  background-image: url('../images/fire.jpeg');
+  width: 106px;
+  height: 50px;
+  background-size: auto;
+  background-position: center;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  font-family: Luminari, fantasy;
+  outline: none;
+  cursor: pointer;
+}
+
+.button-wrapper {
+  padding-top: 20px;
+}
