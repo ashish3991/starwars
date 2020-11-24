@@ -31,7 +31,7 @@ const Home = () => {
   const name = useSelector((state) => state.session.name);
   return (
     <div className='home-wrapper'>
-      <div className='welcome'> ~ Welcome: Poggle the Lesser ~ {name}</div>
+      <div className='welcome'> ~ Welcome: {name} ~</div>
       <div className='home'>
         <SwordComponent />
       </div>
