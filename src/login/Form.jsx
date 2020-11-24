@@ -27,7 +27,11 @@ const Form = (props) => {
           </div>
         )}
         <div className='button-wrapper'>
-          <button className='login-button' onClick={() => props.onSubmit()}>
+          <button
+            className='login-button'
+            onClick={() => props.onSubmit()}
+            disabled={props.userName === '' || props.password === ''}
+          >
             Log In
           </button>
         </div>
