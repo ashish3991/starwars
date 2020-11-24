@@ -1,0 +1,40 @@
+.home {
+  background-image: url('../images/home_bg.jpg');
+  height: 95vh;
+  background-size: cover;
+  overflow: hidden;
+}
+.welcome {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(
+    rgb(140, 189, 206),
+    rgb(119, 117, 117),
+    rgb(31, 29, 29)
+  );
+  font-family: Luminari, fantasy;
+  font-size: 30px;
+  opacity: 0.9;
+  box-shadow: 3px 0 8px 8px rgb(136, 134, 146);
+  border-radius: 0 0 5px 5px;
+}
+
+.sword {
+  animation: rotation 8s infinite linear;
+  display: flex;
+  flex-wrap: wrap;
+  width: 150px;
+  height: 150px;
+  opacity: 0.6;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

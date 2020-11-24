@@ -1,5 +1,4 @@
 const initialState = {
-  users: [{ name: 'ashish' }],
   session: {
     name: '',
     isPrivileged: false,
