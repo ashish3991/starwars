@@ -1,7 +1,7 @@
 import { LOGIN, LOGIN_ERROR, GET_PLANETS } from './actionType';
 import Axios from 'axios';
 
-function makeActionCreator(type, ...argNames) {
+const makeActionCreator = (type, ...argNames) => {
   return function (...args) {
     const action = { type };
     argNames.forEach((arg, index) => {
@@ -9,7 +9,7 @@ function makeActionCreator(type, ...argNames) {
     });
     return action;
   };
-}
+};
 
 const loginSuccess = makeActionCreator(LOGIN, 'payload');
 const loginError = makeActionCreator(LOGIN_ERROR, 'payload');
