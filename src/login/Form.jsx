@@ -13,6 +13,7 @@ const Form = (props) => {
           placeholder='Username *'
           value={props.userName}
           onChange={(e) => props.setUserName(e.target.value)}
+          spellCheck={false}
         />
         <input
           className='inputField'
@@ -20,6 +21,7 @@ const Form = (props) => {
           placeholder='Password *'
           value={props.password}
           onChange={(e) => props.setPassword(e.target.value)}
+          spellCheck={false}
         />
         {props.error && (
           <div style={{ color: 'red', paddingTop: 15, fontWeight: 'bold' }}>

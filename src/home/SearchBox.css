@@ -1,0 +1,111 @@
+.tb {
+  display: table;
+  width: 100%;
+}
+
+.td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+input,
+button {
+  color: #fff;
+  font-family: Nunito;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}
+
+#cover {
+  position: absolute;
+  width: 900px;
+  padding: 20px;
+  margin: -83px auto 0 auto;
+  background-color: black;
+  opacity: 0.6;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px black, 2px 1px 9px 20px #ffffffeb;
+  transform: scale(0.6);
+  display: flex;
+}
+
+.coverWrapper {
+  position: absolute;
+  top: 30%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+input[type='text'] {
+  width: 100%;
+  height: 66px;
+  font-size: 60px;
+  line-height: 1;
+  outline: none;
+  /* font-family: Luminari, fantasy; */
+  font-family: 'Lucida Console', Courier, monospace;
+}
+
+input[type='text']::placeholder {
+  color: white;
+  opacity: 0.2;
+}
+
+#s-cover {
+  width: 1px;
+  padding-left: 35px;
+}
+
+button {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 96px;
+  cursor: pointer;
+}
+
+#s-circle {
+  position: relative;
+  top: -8px;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  margin-top: 0;
+  border-width: 15px;
+  border: 15px solid #fff;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.5s ease all;
+}
+
+button span {
+  position: absolute;
+  top: 68px;
+  left: 43px;
+  display: block;
+  width: 45px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+button span:before,
+button span:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
