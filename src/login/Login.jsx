@@ -28,8 +28,9 @@ const Login = () => {
                 dispatch(login({ user: name, password: password })).then(
                   (result) => {
                     setTimeout(() => {
+                      localStorage.setItem('name', name);
                       history.push('/Home');
-                    }, 5000);
+                    }, 4000);
                   }
                 );
               }}

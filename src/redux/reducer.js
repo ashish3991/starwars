@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         session: {
           name: name,
-          isPrivileged: name === 'Luke Skywalker' ? true : false,
+          // isPrivileged: name === 'Luke Skywalker' ? true : false,
           created: true,
         },
       };

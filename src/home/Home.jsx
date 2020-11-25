@@ -87,32 +87,77 @@ const Home = () => {
   const dispatch = useDispatch();
   const [searcText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [hitCount, setHitCount] = useState(0);
+  const [counter, setCounter] = React.useState(10);
+
+  const nameInlocalStorage = localStorage.getItem('name');
 
   useEffect(() => {
     dispatch(getPlanets());
-    if (!session.created) history.push('/login');
+    console.log(nameInlocalStorage);
+    if (!session.created && nameInlocalStorage === null) {
+      history.push('/login');
+    }
   }, []);
 
   const search = (key) => {
-    const searchedData = planets.filter((planet) =>
-      planet.name.toLowerCase().includes(key.toLowerCase())
-    );
-    setSearchResults(searchedData);
+    if (hitCount <= 15) {
+      const searchedData = planets.filter((planet) =>
+        planet.name.toLowerCase().includes(key.toLowerCase())
+      );
+      setSearchResults(searchedData);
+    } else {
+      alert('Please Wait!! You can only search 15 times in a minute !!');
+    }
   };
+
+  useEffect(() => {
+    let count = 10;
+    if (hitCount === 1) {
+      var myInterval = setInterval(() => {
+        if (count > 0) {
+          count--;
+        } else {
+          clearInterval(myInterval);
+          setHitCount(0);
+        }
+      }, 1000);
+    }
+  }, [hitCount]);
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && nameInlocalStorage !== null ? (
         <Spinner />
       ) : (
         <div className='home-wrapper'>
-          <div className='welcome'> ~ Welcome: {session.name} ~</div>
+          <div className='welcome'>
+            {' '}
+            ~ Welcome: {nameInlocalStorage} ~{' '}
+            <div
+              style={{
+                display: 'flex',
+                right: 20,
+                position: 'absolute',
+                fontFamily: 'monospace',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                localStorage.removeItem('name');
+                history.push('/');
+              }}
+            >
+              Exit
+            </div>
+          </div>
+
           <div className='home'>
             <SwordComponent />
             <SearchBox
               value={searcText}
               onChange={(e) => {
                 let val = e.target.value;
+                setHitCount((count) => count + 1);
                 setSearchText(val);
                 if (val !== '') search(val);
                 else setSearchResults([]);
