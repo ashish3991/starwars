@@ -1,9 +1,11 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Sword } from '../images/index';
 import './Home.css';
 import SearchBox from './SearchBox';
 import { getPlanets } from '../redux/actionCreator';
+import Spinner from '../spinner/Spinner';
 
 const SwordComponent = () => {
   return (
@@ -80,14 +82,15 @@ const Results = ({ planets }) => {
 };
 
 const Home = () => {
-  const name = useSelector((state) => state.session.name);
-  const planets = useSelector((state) => state.planets);
+  let history = useHistory();
+  const { session, planets, isLoading } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [searcText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     dispatch(getPlanets());
+    if (!session.created) history.push('/login');
   }, []);
 
   const search = (key) => {
@@ -98,23 +101,29 @@ const Home = () => {
   };
 
   return (
-    <div className='home-wrapper'>
-      <div className='welcome'> ~ Welcome: {name} ~</div>
-      <div className='home'>
-        <SwordComponent />
-        <SearchBox
-          value={searcText}
-          onChange={(e) => {
-            let val = e.target.value;
-            setSearchText(val);
-            if (val !== '') search(val);
-            else setSearchResults([]);
-          }}
-        >
-          {searchResults.length > 0 && <Results planets={searchResults} />}
-        </SearchBox>
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className='home-wrapper'>
+          <div className='welcome'> ~ Welcome: {session.name} ~</div>
+          <div className='home'>
+            <SwordComponent />
+            <SearchBox
+              value={searcText}
+              onChange={(e) => {
+                let val = e.target.value;
+                setSearchText(val);
+                if (val !== '') search(val);
+                else setSearchResults([]);
+              }}
+            >
+              {searchResults.length > 0 && <Results planets={searchResults} />}
+            </SearchBox>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 export default Home;

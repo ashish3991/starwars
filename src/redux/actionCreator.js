@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_ERROR, GET_PLANETS } from './actionType';
+import { LOGIN, LOGIN_ERROR, GET_PLANETS, LOADING } from './actionType';
 import Axios from 'axios';
 
 const makeActionCreator = (type, ...argNames) => {
@@ -14,23 +14,31 @@ const makeActionCreator = (type, ...argNames) => {
 const loginSuccess = makeActionCreator(LOGIN, 'payload');
 const loginError = makeActionCreator(LOGIN_ERROR, 'payload');
 const allPlanets = makeActionCreator(GET_PLANETS, 'payload');
+const isLoading = makeActionCreator(LOADING, 'payload');
 
 export const login = (payload) => {
   return (dispatch) => {
-    validateUser(payload).then((data) => {
-      if (data && data.birth_year === payload.password) {
-        return dispatch(loginSuccess(payload));
-      } else {
-        return dispatch(loginError(payload));
-      }
+    dispatch(isLoading(true));
+    return new Promise((resolve, reject) => {
+      validateUser(payload).then((data) => {
+        if (data && data.birth_year === payload.password) {
+          return dispatch(loginSuccess(payload));
+        } else {
+          dispatch(isLoading(false));
+          return dispatch(loginError(payload));
+        }
+      });
+      resolve();
     });
   };
 };
 
 export const getPlanets = () => {
   return (dispatch) => {
+    dispatch(isLoading(true));
     let planets = [];
     getAllPlanets(planets).then((response) => {
+      dispatch(isLoading(false));
       dispatch(allPlanets(response));
     });
   };

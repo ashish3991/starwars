@@ -6,6 +6,7 @@ const initialState = {
     isError: false,
   },
   planets: [],
+  isLoading: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,6 +27,9 @@ export default function reducer(state = initialState, action) {
 
     case 'GET_PLANETS':
       return { ...state, planets: action.payload };
+
+    case 'LOADING':
+      return { ...state, isLoading: action.payload };
 
     default:
       return state;
