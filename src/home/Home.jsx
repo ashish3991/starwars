@@ -53,7 +53,13 @@ const Compare = (a, b, key) => {
   }
 };
 
-const Results = ({ planets }) => {
+const Results = ({
+  planets,
+  setPlanets,
+  setSearchText,
+  setShowPlanet,
+  setSelectedPlanet,
+}) => {
   let height = 90;
   return (
     <div className='planets-result'>
@@ -67,6 +73,12 @@ const Results = ({ planets }) => {
                 className={'planet-name ' + index}
                 style={{
                   height: height - 2 * index,
+                }}
+                onClick={() => {
+                  setPlanets([]);
+                  setSearchText('');
+                  setShowPlanet(true);
+                  setSelectedPlanet(item);
                 }}
               >
                 <span>{item.name}</span>
@@ -90,6 +102,8 @@ const Home = () => {
   const [hitCount, setHitCount] = useState(0);
   const [counter, setCounter] = React.useState(60);
   const name = localStorage.getItem('name');
+  const [showPlanet, setShowPlanet] = useState();
+  const [selectedPlanet, setSelectedPlanet] = useState(null);
 
   const nameInlocalStorage = localStorage.getItem('name');
 
@@ -163,6 +177,8 @@ const Home = () => {
             <SearchBox
               value={searcText}
               onChange={(e) => {
+                setShowPlanet(false);
+                setSelectedPlanet(null);
                 let val = e.target.value;
                 if (val !== '') search(val);
                 else {
@@ -171,8 +187,21 @@ const Home = () => {
                 }
               }}
             >
-              {searchResults.length > 0 && <Results planets={searchResults} />}
+              {searchResults.length > 0 && (
+                <Results
+                  planets={searchResults}
+                  setPlanets={setSearchResults}
+                  setSearchText={setSearchText}
+                  setShowPlanet={setShowPlanet}
+                  setSelectedPlanet={setSelectedPlanet}
+                />
+              )}
             </SearchBox>
+            {showPlanet && (
+              <div className='planet-detail'>
+                {JSON.stringify(selectedPlanet)}
+              </div>
+            )}
           </div>
         </div>
       )}
