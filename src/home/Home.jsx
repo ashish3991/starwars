@@ -199,7 +199,22 @@ const Home = () => {
             </SearchBox>
             {showPlanet && (
               <div className='planet-detail'>
-                {JSON.stringify(selectedPlanet)}
+                {/* {JSON.stringify(selectedPlanet)} */}
+                <table
+                  style={{
+                    backgroundColor: 'white',
+                    border: '1px solid black',
+                  }}
+                >
+                  {Object.keys(selectedPlanet).map((key) => {
+                    return (
+                      <tr>
+                        <td>{key}</td>
+                        <td>{selectedPlanet[key]}</td>
+                      </tr>
+                    );
+                  })}
+                </table>
               </div>
             )}
           </div>
