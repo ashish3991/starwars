@@ -203,7 +203,7 @@ const Home = () => {
                 <table className={'planet-table'}>
                   {Object.keys(selectedPlanet).map((key) => {
                     return (
-                      <tr>
+                      <tr key={key}>
                         <td>{key}</td>
                         <td>{selectedPlanet[key]}</td>
                       </tr>
