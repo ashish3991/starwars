@@ -27,7 +27,7 @@ const SwordComponent = () => {
         style={{
           marginTop: '40%',
           bottom: 0,
-          marginLeft: '80vw',
+          marginLeft: '78vw',
         }}
       />
     </div>
@@ -126,6 +126,7 @@ const Home = () => {
           clearInterval(myInterval);
           setCounter(60);
           setHitCount(0);
+          setSearchText('');
         }
       }, 1000);
     }
