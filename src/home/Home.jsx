@@ -88,37 +88,43 @@ const Home = () => {
   const [searcText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [hitCount, setHitCount] = useState(0);
-  const [counter, setCounter] = React.useState(10);
+  const [counter, setCounter] = React.useState(60);
+  const name = localStorage.getItem('name');
 
   const nameInlocalStorage = localStorage.getItem('name');
 
   useEffect(() => {
     dispatch(getPlanets());
-    console.log(nameInlocalStorage);
     if (!session.created && nameInlocalStorage === null) {
       history.push('/login');
     }
   }, []);
 
   const search = (key) => {
-    if (hitCount <= 15) {
+    if (hitCount < 15 || name.toLowerCase() === 'luke skywalker') {
+      setHitCount((count) => count + 1);
+      setSearchText(key);
       const searchedData = planets.filter((planet) =>
         planet.name.toLowerCase().includes(key.toLowerCase())
       );
       setSearchResults(searchedData);
     } else {
-      alert('Please Wait!! You can only search 15 times in a minute !!');
+      alert(
+        `Please Wait for ${counter} seconds! You can only search 15 times in a minute !!`
+      );
     }
   };
 
   useEffect(() => {
-    let count = 10;
-    if (hitCount === 1) {
+    let count = 60;
+    if (hitCount === 1 && name.toLowerCase() !== 'luke skywalker') {
       var myInterval = setInterval(() => {
         if (count > 0) {
           count--;
+          setCounter(count);
         } else {
           clearInterval(myInterval);
+          setCounter(60);
           setHitCount(0);
         }
       }, 1000);
@@ -157,10 +163,11 @@ const Home = () => {
               value={searcText}
               onChange={(e) => {
                 let val = e.target.value;
-                setHitCount((count) => count + 1);
-                setSearchText(val);
                 if (val !== '') search(val);
-                else setSearchResults([]);
+                else {
+                  setSearchResults([]);
+                  setSearchText(val);
+                }
               }}
             >
               {searchResults.length > 0 && <Results planets={searchResults} />}
