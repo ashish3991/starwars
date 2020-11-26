@@ -81,6 +81,7 @@
   border: 1px solid black !important;
   width: 100%;
   overflow: auto !important;
+  opacity: 0.8;
 }
 
 .planet-table td {
