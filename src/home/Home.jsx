@@ -200,12 +200,7 @@ const Home = () => {
             {showPlanet && (
               <div className='planet-detail'>
                 {/* {JSON.stringify(selectedPlanet)} */}
-                <table
-                  style={{
-                    backgroundColor: 'white',
-                    border: '1px solid black',
-                  }}
-                >
+                <table className={'planet-table'}>
                   {Object.keys(selectedPlanet).map((key) => {
                     return (
                       <tr>
